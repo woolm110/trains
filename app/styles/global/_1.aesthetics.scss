@@ -1,0 +1,36 @@
+%anchor-hover {
+  position: relative;
+  text-transform: uppercase;
+  color: $secondary;
+  text-decoration: none;
+  border: 5px solid transparent;
+  border-left: 0;
+
+  &:hover {
+    color: $secondary;
+
+    &:before {
+      @include transform(scaleX(1));
+      visibility: visible;
+    }
+  }
+
+  &:before {
+    @include transform(scaleX(0));
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -10px;
+    left: 0;
+    background-color: $secondary;
+    visibility: hidden;
+    @include transition(all 0.3s ease-in-out 0s);
+  }
+}
+
+%hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}

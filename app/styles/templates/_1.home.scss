@@ -1,0 +1,29 @@
+.site-wrapper {
+  @include outer-container($containerWidth);
+
+  h1 {
+    text-align: center;
+  }
+
+  .btn-wrap {
+    text-align: center;
+  }
+
+  .trains {
+    margin-top: 50px;
+  }
+
+  table {
+    width: 100%;
+
+    td, th {
+      width: calc(100% / 3);
+      height: 50px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+    }
+  }
+}

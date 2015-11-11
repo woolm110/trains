@@ -23,12 +23,14 @@
 
         _this.retrieveTrains(_this.CONST.API, function(result) {
           var l = result.departures.all.length,
-            limit = 4;
+            limit = 5;
 
           for (var i = 0; i < limit; i++) {
             var _this = result.departures.all[i];
 
-            html += '<tr><td>' + _this.destination_name + '</td><td>' + _this.aimed_departure_time + '</td><td>' + _this.platform + '</td></tr>'
+            if (_this.platform > 10) {
+              html += '<tr><td>' + _this.destination_name + '</td><td>' + _this.aimed_departure_time + '</td><td>' + _this.platform + '</td></tr>'
+            }
           };
 
           document.querySelectorAll('.trains')[0].innerHTML = html + '</table>';

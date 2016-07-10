@@ -3,7 +3,6 @@ import {TrainComponent} from './train.component';
 import {TrainsService} from '../Services/trains.service';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import 'rxjs/add/operator/map';
-import {KeysPipe} from '../Pipes/keys.pipe'
 
 // decorator / call it
 @Component({
@@ -36,10 +35,9 @@ import {KeysPipe} from '../Pipes/keys.pipe'
       float: left;
       margin-bottom: 30px;
     }
-  `]
+  `],
   directives: [TrainComponent],
-  providers: [TrainsService, HTTP_PROVIDERS], // required so we can call our service in the constructor
-  pipes: [KeysPipe]
+  providers: [TrainsService, HTTP_PROVIDERS] // required so we can call our service in the constructor
 })
 
 export class AppComponent {

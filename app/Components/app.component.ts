@@ -15,6 +15,9 @@ import 'rxjs/add/operator/map';
        <div class="col text-center"><h3>Time</h3></div>
        <div class="col text-center"><h3>Platform</h3></div>
      </div>
+     <div class="row">
+       <button (click)="findNextTrain()">Get me home</button>
+     </div>
     <train *ngFor="#train of trains" [data]="train"></train>
   </div>`, // pass data through to template
   styles: [`
@@ -35,21 +38,32 @@ import 'rxjs/add/operator/map';
       float: left;
       margin-bottom: 30px;
     }
+
+    button {
+      margin: 0 auto;
+      display: block;
+      background: white;
+      -webkit-appearance: none;
+      border: none;
+      color: black;
+      border-radius: 2px;
+      padding: 10px 20px;
+      margin-bottom: 30px;
+    }
   `],
   directives: [TrainComponent],
   providers: [TrainsService, HTTP_PROVIDERS] // required so we can call our service in the constructor
 })
 
 export class AppComponent {
-  req: any;
   trains: any;
 
-  constructor(private _trainsService: TrainsService) {
+  constructor(private _trainsService: TrainsService) {}
 
-    this.req = _trainsService.getTrains()
-      .subscribe((res) => {
-        this.trains = res.departures.all;
-      })
+   findNextTrain() {
+      this._trainsService.getTrains()
+        .subscribe(res => this.trains = res.departures.all)
+     }
    }
 }
 

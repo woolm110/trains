@@ -31,18 +31,18 @@ System.register(['angular2/core', './train.component', '../Services/trains.servi
             // decorator / call it
             AppComponent = (function () {
                 function AppComponent(_trainsService) {
-                    var _this = this;
                     this._trainsService = _trainsService;
-                    this.req = _trainsService.getTrains()
-                        .subscribe(function (res) {
-                        _this.trains = res.departures.all;
-                    });
                 }
+                AppComponent.prototype.findNextTrain = function () {
+                    var _this = this;
+                    this._trainsService.getTrains()
+                        .subscribe(function (res) { return _this.trains = res.departures.all; });
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <div class=\"container\">\n     <h2 class=\"text-center\">Trains</h2>\n     <div class=\"row header\">\n       <div class=\"col text-center\"><h3>Destination</h3></div>\n       <div class=\"col text-center\"><h3>Time</h3></div>\n       <div class=\"col text-center\"><h3>Platform</h3></div>\n     </div>\n    <train *ngFor=\"#train of trains\" [data]=\"train\"></train>\n  </div>",
-                        styles: ["\n    h2 {\n      margin-bottom: 30px;\n    }\n\n    h3 {\n      font-size: 20px;\n    }\n\n    .header > div {\n      height: 50px;\n    }\n\n    .col {\n      width: calc(100% / 3);\n      float: left;\n      margin-bottom: 30px;\n    }\n  "],
+                        template: "\n  <div class=\"container\">\n     <h2 class=\"text-center\">Trains</h2>\n     <div class=\"row header\">\n       <div class=\"col text-center\"><h3>Destination</h3></div>\n       <div class=\"col text-center\"><h3>Time</h3></div>\n       <div class=\"col text-center\"><h3>Platform</h3></div>\n     </div>\n     <div class=\"row\">\n       <button (click)=\"findNextTrain()\">Get me home</button>\n     </div>\n    <train *ngFor=\"#train of trains\" [data]=\"train\"></train>\n  </div>",
+                        styles: ["\n    h2 {\n      margin-bottom: 30px;\n    }\n\n    h3 {\n      font-size: 20px;\n    }\n\n    .header > div {\n      height: 50px;\n    }\n\n    .col {\n      width: calc(100% / 3);\n      float: left;\n      margin-bottom: 30px;\n    }\n\n    button {\n      margin: 0 auto;\n      display: block;\n      background: white;\n      -webkit-appearance: none;\n      border: none;\n      color: black;\n      border-radius: 2px;\n      padding: 10px 20px;\n      margin-bottom: 30px;\n    }\n  "],
                         directives: [train_component_1.TrainComponent],
                         providers: [trains_service_1.TrainsService, http_1.HTTP_PROVIDERS] // required so we can call our service in the constructor
                     }), 

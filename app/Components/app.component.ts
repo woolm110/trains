@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {TrainComponent} from './train.component';
+import {SpinnerComponent} from './spinner.component';
 import {TrainsService} from '../Services/trains.service';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import 'rxjs/add/operator/map';
@@ -18,6 +19,7 @@ import 'rxjs/add/operator/map';
      <div class="row">
        <button (click)="findNextTrain()">Get me home</button>
      </div>
+     <my-spinner [isRunning]="isRequesting"></my-spinner>
     <train *ngFor="#train of trains" [data]="train"></train>
   </div>`, // pass data through to template
   styles: [`
@@ -51,19 +53,29 @@ import 'rxjs/add/operator/map';
       margin-bottom: 30px;
     }
   `],
-  directives: [TrainComponent],
+  directives: [TrainComponent, SpinnerComponent],
   providers: [TrainsService, HTTP_PROVIDERS] // required so we can call our service in the constructor
 })
 
 export class AppComponent {
-  trains: any;
+  public isRequesting: boolean;
+  private trains: any;
 
   constructor(private _trainsService: TrainsService) {}
 
-   findNextTrain() {
-      this._trainsService.getTrains()
-        .subscribe(res => this.trains = res.departures.all)
-     }
+   private findNextTrain() {
+     this.isRequesting = true;
+
+     this._trainsService.getTrains()
+       .subscribe(
+         res => this.trains = res.departures.all,
+         () => this.stopRefreshing(),
+         () => this.stopRefreshing()
+       )
+   }
+
+   private stopRefreshing() {
+     this.isRequesting = false;
    }
 }
 

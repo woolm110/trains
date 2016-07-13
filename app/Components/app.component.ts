@@ -11,13 +11,13 @@ import 'rxjs/add/operator/map';
   template:`
   <div class="container">
      <h2 class="text-center">Trains</h2>
+     <div class="row">
+       <button (click)="findNextTrain()">Get me home</button>
+     </div>
      <div class="row header">
        <div class="col text-center"><h3>Destination</h3></div>
        <div class="col text-center"><h3>Time</h3></div>
        <div class="col text-center"><h3>Platform</h3></div>
-     </div>
-     <div class="row">
-       <button (click)="findNextTrain()">Get me home</button>
      </div>
      <my-spinner [isRunning]="isRequesting"></my-spinner>
     <train *ngFor="#train of trains" [data]="train"></train>

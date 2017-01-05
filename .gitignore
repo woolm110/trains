@@ -1,5 +1,6 @@
 .DS_Store
 ._*
+.tmp
 .Spotlight-V100
 .Trashes
 npm-debug.log

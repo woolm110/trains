@@ -1,6 +1,6 @@
 # Trains
 
-> Display train times and platforms for a given station.
+> Display train times and platforms from WAT to QRB.
 
 ## Installation
 - `brew update`

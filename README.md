@@ -5,7 +5,7 @@
 ## Installation
 - `brew update`
 - `brew install yarn`
-- `yarn global add typings`
+- `npm install -g typings`
 - `yarn`
 
 ## Npm scripts
